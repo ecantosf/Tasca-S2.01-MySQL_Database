@@ -1,0 +1,57 @@
+# Fitxers generats per l'usuari de WorkBench
+*.mwb.bak
+*.myl
+*.log
+
+# Fitxers de MySQL
+*.frm
+*.myd
+*.myi
+*.ibd
+*.ib_logfile*
+
+# Backups i dumps de BD
+*.sql~
+*.backup
+*.dump
+*.sql.bak
+
+# Configuracions locals (NO versionar credencials!)
+my.cnf
+my.ini
+config.inc.php
+
+# Dades de MySQL (directori de dades)
+data/
+mysql-data/
+
+# Fitxers temporals
+*.tmp
+*.temp
+*~
+~*
+
+# Logs
+*.log
+mysql.log
+error.log
+
+# IDE/Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistemes operatius
+.DS_Store
+Thumbs.db
+
+# Workbench (macOS)
+*.workbench
+
+# Fitxers d'exportació/importació (pot contenir dades sensibles)
+*.csv
+*.json
+*.xml
+dumps/
+exports/
