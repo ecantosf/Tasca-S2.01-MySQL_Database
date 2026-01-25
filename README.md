@@ -35,7 +35,7 @@ Ex 1 - YouTube (Reduced Version): Modeling of a video platform. Includes user ma
 Language: Java JDK 21.0.6 (Used for business logic/connection scripts).
 Database Management: MySQL Server
 Design IDEs:
-Dbeaver
+DBeaver Community 25.3.3
 MySQL Workbench
 Version Control: Git.
 📊 Entity-Relationship Diagrams (ERD)
