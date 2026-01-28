@@ -31,7 +31,7 @@ CREATE TABLE `cities` (
   PRIMARY KEY (`city_id`),
   KEY `fk_cities_provinces_idx` (`province_id`),
   CONSTRAINT `fk_cities_provinces` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`province_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `cities` (
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
+INSERT INTO `cities` VALUES (1,'Barcelona',1),(2,'L\'Hospitalet de Llobregat',1),(3,'Badalona',1),(4,'Terrassa',1),(5,'Sabadell',1),(6,'Mataró',1),(7,'Girona',2),(8,'Figueres',2),(9,'Salt',2),(10,'Palafrugell',2),(11,'Roses',2),(12,'Tarragona',3),(13,'Reus',3),(14,'Lleida',4),(15,'Almacelles',4),(16,'Alpicat',4),(17,'Tàrrega',4),(18,'Balaguer',4),(19,'Barcelona',1),(20,'L\'Hospitalet de Llobregat',1),(21,'Badalona',1),(22,'Terrassa',1),(23,'Sabadell',1),(24,'Mataró',1),(25,'Girona',2),(26,'Figueres',2),(27,'Salt',2),(28,'Palafrugell',2),(29,'Roses',2),(30,'Tarragona',3),(31,'Reus',3),(32,'Lleida',4),(33,'Almacelles',4),(34,'Alpicat',4),(35,'Tàrrega',4),(36,'Balaguer',4);
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,13 +75,13 @@ LOCK TABLES `customers` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `employee`
+-- Table structure for table `employees`
 --
 
-DROP TABLE IF EXISTS `employee`;
+DROP TABLE IF EXISTS `employees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employee` (
+CREATE TABLE `employees` (
   `employee_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(90) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -96,12 +97,12 @@ CREATE TABLE `employee` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `employees`
 --
 
-LOCK TABLES `employee` WRITE;
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -149,15 +150,18 @@ CREATE TABLE `orders` (
   `total_price` decimal(10,2) NOT NULL,
   `customer_id` int NOT NULL,
   `store_id` int NOT NULL,
-  `employee_id` int NOT NULL,
-  `delivery_employee_id` int NOT NULL,
+  `employee_id` int DEFAULT NULL,
+  `delivery_employee_id` int DEFAULT NULL,
   `delivery_datetime` datetime NOT NULL,
+  `prepared_by_employee_id` int DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   KEY `fk_orders_customers_idx` (`customer_id`),
   KEY `fk_orders_stores_idx` (`store_id`),
   KEY `fk_orders_delivery_employee_idx` (`delivery_employee_id`),
+  KEY `fk_orders_prepared_employee` (`prepared_by_employee_id`),
   CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customers_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_orders_delivery_employee` FOREIGN KEY (`delivery_employee_id`) REFERENCES `employee` (`employee_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_delivery_employee` FOREIGN KEY (`delivery_employee_id`) REFERENCES `employees` (`employee_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_orders_prepared_employee` FOREIGN KEY (`prepared_by_employee_id`) REFERENCES `employees` (`employee_id`),
   CONSTRAINT `fk_orders_stores` FOREIGN KEY (`store_id`) REFERENCES `stores` (`store_id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -181,10 +185,9 @@ DROP TABLE IF EXISTS `pizza_categories`;
 CREATE TABLE `pizza_categories` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT 'CURRENT_TIMESTAMP',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`category_id`),
-  UNIQUE KEY `category_name_UNIQUE` (`category_name`),
-  CONSTRAINT `fk_pizza_categories_products` FOREIGN KEY (`category_id`) REFERENCES `products` (`product_id`)
+  UNIQUE KEY `category_name_UNIQUE` (`category_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -238,7 +241,7 @@ CREATE TABLE `provinces` (
   `province_id` int NOT NULL AUTO_INCREMENT,
   `province_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`province_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,6 +250,7 @@ CREATE TABLE `provinces` (
 
 LOCK TABLES `provinces` WRITE;
 /*!40000 ALTER TABLE `provinces` DISABLE KEYS */;
+INSERT INTO `provinces` VALUES (1,'Barcelona'),(2,'Girona'),(3,'Tarragona'),(4,'Lleida');
 /*!40000 ALTER TABLE `provinces` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-28  0:19:58
+-- Dump completed on 2026-01-28 20:12:34
