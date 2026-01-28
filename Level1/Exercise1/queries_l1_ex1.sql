@@ -27,7 +27,7 @@ FROM employees e
 JOIN sales s ON e.employee_id = s.employee_id
 JOIN glasses g ON s.glass_id = g.glass_id
 JOIN brands b ON g.brand_id = b.brand_id
-WHERE e.name = 'Carla Vidal'  -- Canvia pel nom de l'empleat
+WHERE e.name = 'Carla Vidal'
   AND s.datestamp BETWEEN '2023-01-01' AND '2023-12-31'
 GROUP BY e.name, b.name, g.frame_type, g.frame_color, g.lens_color
 ORDER BY total_glasses_sold DESC;
