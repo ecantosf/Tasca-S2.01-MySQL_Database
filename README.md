@@ -31,28 +31,29 @@ List how many orders a specific employee (repartidor/driver) has delivered.
 Complex system design with multiple cross-relationships.
 
 Ex 1 - YouTube (Reduced Version): Modeling of a video platform. Includes user management, channels, subscriptions, playlists, comments, and a like/dislike system with time-stamped logs.
+
 🛠️ Technologies & Tools
-Language: Java JDK 21.0.6 (Used for business logic/connection scripts).
 Database Management: MySQL Server
-Design IDEs:
-DBeaver Community 25.3.3
-MySQL Workbench
+Design IDEs: MySQL Workbench
 Version Control: Git.
+
 📊 Entity-Relationship Diagrams (ERD)
 Each exercise includes its SQL script and its corresponding diagram. The following logic was applied:
 
 Normalization: Cities and provinces have been separated to avoid data redundancy.
 N:M Relationships: Implemented for tag systems (YouTube) and order composition (Pizzeria).
 Recursivity: Modeled in the Optician's customer table to handle the referral system.
+
 📥 Installation
 Clone the repository:
 
-[git clone] (https://github.com/FedEx8525/2.1-MySQL_Database.git)
+[git clone] (https://github.com/ecantosf/Tasca-S2.01-MySQL_Database.git)
 
 Import the database:
 
-Open MySQL Workbench or DataGrip.
+Open MySQL Workbench.
 Execute the .sql file corresponding to each exercise located in the level1/ or level2/ folders.
+
 🤝 Contributions
 This is an educational project. Suggestions to optimize queries or improve the modeling of the diagrams are welcome.
 
