@@ -13,6 +13,21 @@ WHERE p.product_type = 'drink'
 GROUP BY c.city_id, p.product_id
 ORDER BY c.city_name, total_sold DESC;
 
+-- Drinks sold by Girona
+SELECT 
+    c.city_name AS city,
+    p.name AS product,
+    SUM(oi.quantity) AS total_sold
+FROM order_items oi
+JOIN products p ON oi.product_id = p.product_id
+JOIN orders o ON oi.order_id = o.order_id
+JOIN stores s ON o.store_id = s.store_id
+JOIN cities c ON s.city_id = c.city_id
+WHERE p.product_type = 'drink'
+    AND c.city_name = 'Girona'
+GROUP BY c.city_id, p.product_id
+ORDER BY total_sold DESC;
+
 -- List all employees with their order counts
 SELECT 
     e.employee_id,
